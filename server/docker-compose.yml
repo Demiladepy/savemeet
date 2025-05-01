@@ -1,0 +1,75 @@
+services:
+  cv-service:
+    build:
+      context: ./cv-service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - TESTING=true  
+    env_file:
+      - .env
+    networks:
+      - ai_net
+
+  ai-orchestrator:
+    build:
+      context: ./llm-service
+      dockerfile: Dockerfile
+      cache_from:
+        - type=local,src=/tmp/.buildkit_cache
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+    container_name: ai-orchestrator
+    ports:
+      - "8001:8001"
+    environment:
+      - PORT=8001
+      - TESTING=true  
+    env_file:
+      - .env
+    networks:
+      - ai_net
+
+  audio-service:
+    build:
+      context: ./audio-service
+      dockerfile: Dockerfile
+      cache_from:
+        - type=local,src=/tmp/.buildkit_cache
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+    container_name: audio-service
+    ports:
+      - "8002:8002"
+    environment:
+      - PORT=8002
+      - TESTING=true  
+    env_file:
+      - .env
+    networks:
+      - ai_net
+
+  filter-orchestrator:
+    build:
+      context: ./orchestrator-service
+      dockerfile: Dockerfile
+      cache_from:
+        - type=local,src=/tmp/.buildkit_cache
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+    container_name: filter-orchestrator
+    ports:
+      - "8004:8003"
+    environment:
+      - PORT=8003
+      - TESTING=true  
+    env_file:
+      - .env
+    networks:
+      - ai_net
+
+networks:
+  ai_net:
+    driver: bridge

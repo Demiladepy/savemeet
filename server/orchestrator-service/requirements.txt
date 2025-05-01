@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+httpx
+numpy
+opencv-python-headless
+pillow
+scikit-image
+python-dotenv
+openai

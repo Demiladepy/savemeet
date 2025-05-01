@@ -1,0 +1,28 @@
+# API framework
+fastapi
+uvicorn[standard]
+
+# HTTP client & env
+httpx
+python-dotenv
+
+# multipart uploads
+python-multipart
+
+# Computer vision
+numpy
+opencv-python-headless
+pillow
+scikit-image
+easyocr
+ultralytics
+
+# Audio processing
+openai-whisper
+torch
+webrtcvad
+speechbrain
+simple-diarizer
+openai
+# (opcional, si lo necesitas)
+# ffmpeg-python

@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-multipart
+openai-whisper
+torch
+webrtcvad
+speechbrain
+simple-diarizer
+python-dotenv
